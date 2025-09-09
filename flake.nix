@@ -10,7 +10,8 @@
       ...
     }@inputs:
     let
-      lib = nixpkgs.lib.extend (import ./lib/test.nix { inherit lib inputs; });
+      test_lib = import ./lib/test.nix { inherit lib inputs; };
+      lib = nixpkgs.lib.extend test_lib;
 
       forAllSystems = nixpkgs.lib.genAttrs [
         "aarch64-linux"
