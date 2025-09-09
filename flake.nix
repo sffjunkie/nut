@@ -26,7 +26,8 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
         {
-          default = pkgs.callPackage ./pkgs/nut { inherit lib; };
+          nut = pkgs.callPackage ./pkgs/nut { inherit lib; };
+          default = nut;
         }
       );
 
