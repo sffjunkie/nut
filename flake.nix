@@ -10,7 +10,7 @@
       ...
     }@inputs:
     let
-      test_lib = import ./lib/test.nix { inherit lib inputs; };
+      test_lib = import ./lib { inherit lib inputs; };
       lib = nixpkgs.lib.extend test_lib;
 
       forAllSystems = nixpkgs.lib.genAttrs [
@@ -24,9 +24,10 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          nut = pkgs.callPackage ./pkgs/nut { inherit lib; };
         in
         {
-          nut = pkgs.callPackage ./pkgs/nut { inherit lib; };
+          inherit nut;
           default = nut;
         }
       );
